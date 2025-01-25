@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ToDoListView: View {
-    @ObservedObject var viewModel: ToDoListViewModel
-    @State private var newTodoTitle = ""
+    @ObservedObject var viewModel: ToDoListViewModel //observedobject : classe partagée entre plusieurs vues
+    @State private var newTodoTitle = "" //state : local à la vue
     @State private var isShowingAlert = false
     @State private var isAddingTodo = false
     
@@ -27,9 +27,9 @@ struct ToDoListView: View {
                                     .foregroundColor(item.isDone ? .green : .primary)
                             }
                             Text(item.title)
-                                .font(item.isDone ? .subheadline : .body)
-                                .strikethrough(item.isDone)
-                                .foregroundColor(item.isDone ? .gray : .primary)
+                                .font(item.isDone ? .subheadline : .body)//si isDone est true alors police=subheadline sinon body
+                                .strikethrough(item.isDone) //si isDone=true alors texte barré
+                                .foregroundColor(item.isDone ? .gray : .primary) //si isDonne est true alors couleur police grise sinon noir
                         }
                     }
                     .onDelete { indices in
@@ -41,10 +41,10 @@ struct ToDoListView: View {
                 }
                 
                 // Sticky bottom view for adding todos
-                if isAddingTodo {
-                    HStack {
-                        TextField("Enter Task Title", text: $newTodoTitle)
-                            .padding(.leading)
+                if isAddingTodo { //si isAddingTodo = true
+                    HStack { //on crée une HStack
+                        TextField("Enter Task Title", text: $newTodoTitle) //$newToDoTitle : binding vers propriété newToDoTitle. Donc propriété maj
+                            .padding(.leading)                             // qd utilisateur écrit qqe chose. Liaison bidirectionnelle
 
                         Spacer()
                         
@@ -53,15 +53,15 @@ struct ToDoListView: View {
                                 isShowingAlert = true
                             } else {
                                 viewModel.add(
-                                    item: .init(
-                                        title: newTodoTitle
+                                    item: .init( //création instance de ToDoItem
+                                        title: newTodoTitle //avec pour titre ce qui a été écerit par l'utilisateur
                                     )
                                 )
                                 newTodoTitle = "" // Reset newTodoTitle to empty.
                                 isAddingTodo = false // Close the bottom view after adding
                             }
                         }) {
-                            Image(systemName: "plus.circle.fill")
+                            Image(systemName: "plus.circle.fill") //visuel du bouton
                                 .resizable()
                                 .frame(width: 30, height: 30)
                         }
@@ -75,9 +75,9 @@ struct ToDoListView: View {
                 
                 // Button to toggle the bottom add view
                 Button(action: {
-                    isAddingTodo.toggle()
+                    isAddingTodo.toggle() //toggle()-> inverse la val de true à false ou inversement
                 }) {
-                    Text(isAddingTodo ? "Close" : "Add Task")
+                    Text(isAddingTodo ? "Close" : "Add Task") //si isAddingToDo est true alors écrit close sinon add task
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

@@ -6,7 +6,7 @@ protocol ToDoListRepositoryType {
 }
 
 final class ToDoListRepository: ToDoListRepositoryType {
-    private let fileURL: URL
+    private let fileURL: URL //URL du fichier où sont stockées les données et dans lequel les taches st enregistrées
 
     init() {
         // Define a file URL for storing the to-do items in a JSON file

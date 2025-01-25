@@ -6,23 +6,25 @@ final class ToDoListViewModel: ObservableObject {
     private let repository: ToDoListRepositoryType
 
     // MARK: - Init
-
+//Pour créer la dépendance avec le repository
     init(repository: ToDoListRepositoryType) {
-        self.repository = repository
-        self.toDoItems = repository.loadToDoItems()
+        self.repository = repository //crée le lien entre le repository et le viewmodel
+        self.toDoItems = repository.loadToDoItems() //charge les éléments de la liste à la création du viewmodel
     }
 
     // MARK: - Outputs
-
+//OUTPUTS: vers le model
+	
     /// Publisher for the list of to-do items.
-    @Published var toDoItems: [ToDoItem] = [] {
+    @Published var toDoItems: [ToDoItem] = [] { //propriété modifiée par l'utilisateur dans la vue
         didSet {
-            repository.saveToDoItems(toDoItems)
+            repository.saveToDoItems(toDoItems) //qd modif dans le view model, le model est maj
         }
     }
 
     // MARK: - Inputs
-
+//INPUTS: infos reçues de la vue
+	
     // Add a new to-do item with priority and category
     func add(item: ToDoItem) {
         toDoItems.append(item)
@@ -31,7 +33,7 @@ final class ToDoListViewModel: ObservableObject {
     /// Toggles the completion status of a to-do item.
     func toggleTodoItemCompletion(_ item: ToDoItem) {
         if let index = toDoItems.firstIndex(where: { $0.id == item.id }) {
-            toDoItems[index].isDone.toggle()
+            toDoItems[index].isDone.toggle() //inversion du isDone de false à true
         }
     }
 
