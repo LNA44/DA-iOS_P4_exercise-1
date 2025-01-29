@@ -5,19 +5,19 @@ import Combine
 final class ToDoListViewModelTests: XCTestCase {
     // MARK: - Properties
     
-    private var viewModel: ToDoListViewModel!
+    private var viewModel: ToDoListViewModel! //! : optionnel implicite : on est sûr qu'il est initialisé (dans setUp)
     private var repository: MockToDoListRepository!
     
     // MARK: - Setup
     
-    override func setUp() {
-        super.setUp()
+    override func setUp() { //setUp : méthode de la classe XCTest donc override pour la modif
+        super.setUp() //setUp classe parent
         repository = MockToDoListRepository()
         viewModel = ToDoListViewModel(repository: repository)
     }
     
     // MARK: - Tear Down
-    
+    //exécutée après chaque test pour nettoyer l'environnement et éviter les effets de bord d'un test à l'autre
     override func tearDown() {
         viewModel = nil
         repository = nil
@@ -31,11 +31,11 @@ final class ToDoListViewModelTests: XCTestCase {
         let item = ToDoItem(title: "Test Task")
         
         // When
-        viewModel.add(item: item)
+        viewModel.add(item: item) //action testée
         
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 1)
-        XCTAssertTrue(viewModel.toDoItems[0].title == "Test Task")
+        XCTAssertEqual(viewModel.toDoItems.count, 1) //vérifie que liste contient 1 élément
+        XCTAssertTrue(viewModel.toDoItems[0].title == "Test Task")//vérifie titre 1er élément
     }
     
     func testToggleTodoItemCompletion() {

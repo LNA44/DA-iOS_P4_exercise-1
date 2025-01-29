@@ -13,7 +13,7 @@ final class ToDoListViewModel: ObservableObject {
     }
 
     // MARK: - Outputs
-//OUTPUTS: vers le model
+//OUTPUTS: vers la vue
 	
     /// Publisher for the list of to-do items.
     @Published var toDoItems: [ToDoItem] = [] { //propriété modifiée par l'utilisateur dans la vue

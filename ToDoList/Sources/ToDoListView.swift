@@ -54,7 +54,7 @@ struct ToDoListView: View {
                             } else {
                                 viewModel.add(
                                     item: .init( //création instance de ToDoItem
-                                        title: newTodoTitle //avec pour titre ce qui a été écerit par l'utilisateur
+                                        title: newTodoTitle //avec pour titre ce qui a été écrit par l'utilisateur
                                     )
                                 )
                                 newTodoTitle = "" // Reset newTodoTitle to empty.
