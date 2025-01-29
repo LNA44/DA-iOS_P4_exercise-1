@@ -4,6 +4,7 @@ final class ToDoListViewModel: ObservableObject {
     // MARK: - Private properties
 
     private let repository: ToDoListRepositoryType
+	@Published var allFilters: [String] = ["All", "Done", "Not Done"]
 
     // MARK: - Init
 //Pour créer la dépendance avec le repository
@@ -43,7 +44,12 @@ final class ToDoListViewModel: ObservableObject {
     }
 
     /// Apply the filter to update the list.
-    func applyFilter(at index: Int) {
-        // TODO: - Implement the logic for filtering
-    }
+	func applyFilter(at filterIndex: Int) {
+		if filterIndex == 1 {
+			toDoItems=toDoItems.filter({!$0.isDone})
+		}
+		if filterIndex == 2 {
+			toDoItems=toDoItems.filter({$0.isDone})
+		}
+	} // TODO: - Implement the logic for filtering
 }

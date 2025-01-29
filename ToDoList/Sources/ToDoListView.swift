@@ -7,13 +7,25 @@ struct ToDoListView: View {
     @State private var isAddingTodo = false
     
     // New state for filter index
-    @State private var filterIndex = 0
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                // Filter selector
-                // TODO: - Add a filter selector which will call the viewModel for updating the displayed data
+	@State private var filterIndex = 0 //correspond à l'index de la première case
+	var body: some View {
+		NavigationView {
+			VStack {
+				Picker(
+					selection: $filterIndex,
+					label: (Text("Filter")),
+					content: { ForEach(0..<viewModel.allFilters.count, id: \.self) { index in
+						Text(viewModel.allFilters[index]) //Texte pour chaque segment
+					}
+				})
+				.pickerStyle(SegmentedPickerStyle())
+				.frame(width:50)
+				.onChange(of: filterIndex) { newValue in
+									// Lorsque le filtre change, applique le filtre dans le ViewModel
+					viewModel.applyFilter(at: newValue)
+				}
+				// Filter selector
+				// TODO: - Add a filter selector which will call the viewModel for updating the displayed data
                 // List of tasks
                 List {
                     ForEach(viewModel.toDoItems) { item in
@@ -95,12 +107,12 @@ struct ToDoListView: View {
     }
 }
 
-struct ToDoListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ToDoListView(
-            viewModel: ToDoListViewModel(
-                repository: ToDoListRepository()
-            )
-        )
-    }
-}
+//struct ToDoListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ToDoListView(
+//            viewModel: ToDoListViewModel(
+//                repository: ToDoListRepository()
+//           )
+//        )
+//   }
+//}
