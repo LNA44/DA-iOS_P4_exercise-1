@@ -77,11 +77,11 @@ final class ToDoListViewModelTests: XCTestCase {
         // When
         viewModel.applyFilter(at: 1)
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 1)
+        XCTAssertEqual(viewModel.filteredToDoItems.count, 1)
         
         // When
         viewModel.applyFilter(at: 2)
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 1)
+        XCTAssertEqual(viewModel.filteredToDoItems.count, 1)
     }
 }

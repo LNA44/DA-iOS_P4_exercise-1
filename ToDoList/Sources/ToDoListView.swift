@@ -6,52 +6,102 @@ struct ToDoListView: View {
     @State private var isShowingAlert = false
     @State private var isAddingTodo = false
     
-    // New state for filter index
-	@State private var filterIndex = 0 //correspond à l'index de la première case
+	
 	var body: some View {
 		NavigationView {
 			VStack {
+				// TODO: Filter selector
 				Picker(
-					selection: $filterIndex,
+					selection: $viewModel.filterIndex,
 					label: (Text("Filter")),
 					content: { ForEach(0..<viewModel.allFilters.count, id: \.self) { index in
 						Text(viewModel.allFilters[index]) //Texte pour chaque segment
 					}
 				})
 				.pickerStyle(SegmentedPickerStyle())
-				.frame(width:50)
-				.onChange(of: filterIndex) { newValue in
+				.frame(width:300)
+				.onChange(of: viewModel.filterIndex) { newValue in
 									// Lorsque le filtre change, applique le filtre dans le ViewModel
 					viewModel.applyFilter(at: newValue)
 				}
-				// Filter selector
-				// TODO: - Add a filter selector which will call the viewModel for updating the displayed data
-                // List of tasks
-                List {
-                    ForEach(viewModel.toDoItems) { item in
-                        HStack {
-                            Button(action: {
-                                viewModel.toggleTodoItemCompletion(item)
-                            }) {
-                                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(item.isDone ? .green : .primary)
-                            }
-                            Text(item.title)
-                                .font(item.isDone ? .subheadline : .body)//si isDone est true alors police=subheadline sinon body
-                                .strikethrough(item.isDone) //si isDone=true alors texte barré
-                                .foregroundColor(item.isDone ? .gray : .primary) //si isDonne est true alors couleur police grise sinon noir
-                        }
-                    }
-                    .onDelete { indices in
-                        indices.forEach { index in
-                            let item = viewModel.toDoItems[index]
-                            viewModel.removeTodoItem(item)
-                        }
-                    }
-                }
-                
+                // Liste des taches dépendant de la sélection du picker
+				if viewModel.filterIndex == 0{
+					
+					List {
+						ForEach(viewModel.toDoItems) { item in
+							HStack {
+								Button(action: {
+									viewModel.toggleTodoItemCompletion(item)
+								}) {
+									Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+										.resizable()
+										.frame(width: 25, height: 25)
+										.foregroundColor(item.isDone ? .green : .primary)
+								}
+								Text(item.title)
+									.font(item.isDone ? .subheadline : .body)//si isDone est true alors police=subheadline sinon body
+									.strikethrough(item.isDone) //si isDone=true alors texte barré
+									.foregroundColor(item.isDone ? .gray : .primary) //si isDonne est true alors couleur police grise sinon noir
+							}
+						}
+						.onDelete { indices in
+							indices.forEach { index in
+								let item = viewModel.toDoItems[index]
+								viewModel.removeTodoItem(item)
+							}
+						}
+					}
+				}else if viewModel.filterIndex == 1 {
+					List {
+						ForEach(viewModel.filteredToDoItems) { item in
+							HStack {
+								Button(action: {
+									viewModel.toggleTodoItemCompletion(item)
+								}) {
+									Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+										.resizable()
+										.frame(width: 25, height: 25)
+										.foregroundColor(item.isDone ? .green : .primary)
+								}
+								Text(item.title)
+									.font(item.isDone ? .subheadline : .body)//si isDone est true alors police=subheadline sinon body
+									.strikethrough(item.isDone) //si isDone=true alors texte barré
+									.foregroundColor(item.isDone ? .gray : .primary) //si isDonne est true alors couleur police grise sinon noir
+							}
+						}
+						.onDelete { indices in
+							indices.forEach { index in
+								let item = viewModel.toDoItems[index]
+								viewModel.removeTodoItem(item)
+							}
+						}
+					}
+				} else if viewModel.filterIndex == 2 {
+					List {
+						ForEach(viewModel.filteredToDoItems) { item in
+							HStack {
+								Button(action: {
+									viewModel.toggleTodoItemCompletion(item)
+								}) {
+									Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+										.resizable()
+										.frame(width: 25, height: 25)
+										.foregroundColor(item.isDone ? .green : .primary)
+								}
+								Text(item.title)
+									.font(item.isDone ? .subheadline : .body)//si isDone est true alors police=subheadline sinon body
+									.strikethrough(item.isDone) //si isDone=true alors texte barré
+									.foregroundColor(item.isDone ? .gray : .primary) //si isDonne est true alors couleur police grise sinon noir
+							}
+						}
+						.onDelete { indices in
+							indices.forEach { index in
+								let item = viewModel.toDoItems[index]
+								viewModel.removeTodoItem(item)
+							}
+						}
+					}
+				}
                 // Sticky bottom view for adding todos
                 if isAddingTodo { //si isAddingTodo = true
                     HStack { //on crée une HStack
