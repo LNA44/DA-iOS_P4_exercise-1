@@ -18,7 +18,6 @@ final class ToDoListViewModel: ObservableObject {
     }
 
     // MARK: - Outputs
-//OUTPUTS: vers la vue
 	
     /// Publisher for the list of to-do items.
     @Published var toDoItems: [ToDoItem] = [] { //propriété modifiée par l'utilisateur dans la vue
@@ -29,7 +28,6 @@ final class ToDoListViewModel: ObservableObject {
     }
 
     // MARK: - Inputs
-//INPUTS: infos reçues de la vue
 	
     // Add a new to-do item with priority and category
     func add(item: ToDoItem) {
