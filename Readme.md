@@ -1,61 +1,77 @@
-# SwiftUI To-Do List
+# ToDo List
 
-<img width="200" alt="Screenshot 2023-09-28 at 11 34 13" src="https://github.com/OpenClassrooms-Student-Center/DA-iOS_P4_exercise-1/assets/10169030/cd0884fa-fcf8-4718-b53a-f65626ea89c2">
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-
-### Introduction
+## 🇬🇧 English Version
 
 This is a simple To-Do List application built using SwiftUI. It allows users to create, manage, and prioritize their tasks easily.
 
-### Features
+## Features
 
-- **Create Tasks**: Add new tasks with titles.
-- **Task Prioritization**: Assign priorities to tasks (Low, Medium, High).
-- **Task Completion**: Mark tasks as completed.
-- **Task Deletion**: Remove tasks from the list.
+Create Tasks: Add new tasks with titles.
+Task Prioritization: Assign priorities to tasks (Low, Medium, High).
+Task Completion: Mark tasks as completed.
+Task Deletion: Remove tasks from the list.
+Filtering: Filter tasks by All, Done, or Not Done status.
 
-### Todo
+## Requirements
 
-- **Filtering**: Filter tasks by All, Done, or Not Done status.
+iOS 16.0+
 
-### MVVM Architecture (Model - View - ViewModel)
+## Architecture
 
-##### View
-Responsible of managing the view state. No data/data-logic is handled here.
+MVVM (Model-View-ViewModel)
 
-##### ViewModel
-This is where the magic happens. This layer is listening for events from above through Inputs and transform them to Outputs. Thanks to this separation, each layer can communicates with each others without having a tight coupling of responsabilities.
+## Technologies & Frameworks
 
-##### Repository (Model)
-Responsible of providing Data, by hiding where it comes from. In this project it's basicaly provided by `FileManager` but it could be either from Network etc..
+SwiftUI
+Swift
 
-## Getting Started
+## Setup
 
-### Prerequisites
+Clone the repository:  
+git clone https://github.com/LNA44/DA-iOS_P4_exercise-1.git
 
-- Xcode 14 or later.
-- iOS 16 or later.
+## App Preview
 
-### Installation
+<img src="https://github.com/user-attachments/assets/9071bb77-8698-41a6-ab10-f5a368e864fb" width="200" />
 
-1. Clone the repository to your local machine:
-```shell
-git clone https://github.com/OpenClassrooms-Student-Center/DA-iOS_P4_exercise-1.git
-```
-2. Open the project in Xcode.
-3. Build and run the project on your preferred simulator or physical device.
-4. Execute the unit tests and see that the filters one are failing 🕵️‍♀️
+<img src="https://github.com/user-attachments/assets/a33dbd77-1b0d-4d0a-9971-4088fa0c471a" width="200" />
 
-### Usage
 
-Launch the app and play with it 💪
+## 🇫🇷 Version Française
+
+Il s'agit d'une application simple de liste de tâches (To-Do List) développée avec SwiftUI. Elle permet aux utilisateurs de créer, gérer et prioriser facilement leurs tâches.
+
+## Fonctionnalités
+
+Créer des tâches : Ajoutez de nouvelles tâches avec un titre.
+
+Priorisation des tâches : Assignez un niveau de priorité aux tâches (Faible, Moyenne, Élevée).
+
+Achèvement des tâches : Marquez les tâches comme terminées.
+
+Suppression des tâches : Supprimez des tâches de la liste.
+
+Filtrage : Filtrez les tâches par statut : Toutes, Terminées ou Non terminées.
+
+## Prérequis
+
+iOS 16.0+
+
+## Architecture
+
+MVVM (Model-View-ViewModel)
+
+## Technologies & Frameworks
+
+SwiftUI
+Swift
+
+## Installation
+
+Cloner le dépôt :
+git clone https://github.com/LNA44/DA-iOS_P4_exercise-1.git
+
+
+
 
 
